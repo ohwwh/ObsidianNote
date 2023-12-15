@@ -1,0 +1,167 @@
+{
+  "main": {
+    "id": "5849bfb0eedc9d63",
+    "type": "split",
+    "children": [
+      {
+        "id": "6dc3342b1163b700",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "647e7afe9b8b6f2b",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "ee8b3ed4dcd5c1c3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MapleAgent/LogoutUserViewer.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5e71e576e9828099",
+    "type": "split",
+    "children": [
+      {
+        "id": "55b756972a2cf365",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "63648c056bc81b9b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "cc17763de51d05bb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2e4eec38d33fc3fe",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 214.5
+  },
+  "right": {
+    "id": "818a875af83b0b6e",
+    "type": "split",
+    "children": [
+      {
+        "id": "df1b4de6e2a67a63",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9ac7193b0be03038",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "MapleAgent/LogoutUserViewer.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8274ba32baacc618",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "MapleAgent/LogoutUserViewer.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "dd83697666cbc607",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "806b8d382b94fc7b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "MapleAgent/LogoutUserViewer.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false
+    }
+  },
+  "active": "ee8b3ed4dcd5c1c3",
+  "lastOpenFiles": [
+    "한일할일.md",
+    "MapleAgent/LogoutUserViewer.md",
+    "MapleAgent.md",
+    "MapleAgent",
+    "무제 파일.canvas",
+    "2023-12-15.md"
+  ]
+}
