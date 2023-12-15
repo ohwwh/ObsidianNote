@@ -64,41 +64,30 @@
     4. **purchase**
         - SP 새로 필요할 것으로 보임. user_no에 대한 결제 건 수를 합친 값만 필요한데, 기존 SP 사용 시 모든 결제 건 만큼 row가 생기게 된다
 - log_character_logout 테이블 컬럼 추가
-    
-    - ip/country/language/osType 정보를 해당 테이블에서 추가로 남기도록 작업
-        
+    - ip/country/language/osType 정보를 해당 테이블에서 추가로 남기도록 작업    
     - 컬럼 추가
-        - LogScehma.xml 수정
-    - 데이터 insert
-        - Protocol::NProcess::NDispatch::NLog::CharacterLogout에 코드 추가
+	    - LogScehma.xml 수정
+	    - 데이터 insert
+	        - Protocol::NProcess::NDispatch::NLog::CharacterLogout에 코드 추가
             ```cpp
             auto*	connectIp = aliver->GetIP();
             STRING	country = aliver->GetDeviceInfoDetail()->country;
             STRING	language = aliver->GetDeviceInfoDetail()->locale;
             INT		market = aliver->GetDeviceInfoDetail()->marketType;
-            ```
-            
-    - 순서 이슈
-        
-        - TLogSchema의 처리 때문에, LogSchema에 컬럼을 추가할 때는 무조건 마지막 부터 추가해야 함.
-            
-        - LogSchema 상의 순서(=실제 DB상의 컬럼 순서)와 서버 코드(Schema.h)의 순서가 다른 경우, typearray의 Index가 달라져 문제가 생김: 테스트 시 실제로 데이터가 이상하게 들어가는 것 확인
-            
-            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/5c64ed80-536a-4832-9f8b-1ec16f1bb0c7/4ab7bc5b-0ba5-4a53-b677-f35eff2c1757/Untitled.png)
-            
-        - 서버 코드 수정, 점검 스크립트 메일 재 발송
-            
-        
+            ```    
+	    - 브랜치 별로 Schema.cpp, Schema.h 수정(QueryGenerator 돌리면 파일 자동 생성)
+	    - 순서 이슈
+		    - TLogSchema의 처리 때문에, LogSchema에 컬럼을 추가할 때는 무조건 마지막 부터 추가해야 함.
+		    -  LogSchema 상의 순서(=실제 DB상의 컬럼 순서)와 서버 코드(Schema.h)의 순서가 다른 경우, typearray의 Index가 달라져 문제가 생김: 테스트 시 실제로 데이터가 이상하게 들어가는 것 확인![[Pasted image 20231215103616.png]]
+		    - 서버 코드 수정, 점검 스크립트 메일 재 발송
 - API를 호출할 때, 월드 별로 따로 호출하는 현재의 API를 쓸 것인가 vs 모든 월드 별로 쿼리를 실행하여 결과를 합쳐주는 새로운 API를 팔 것인가
-    
 - 예외 처리를 어떻게 할 것인가?
-    
-    - try - catch는 지양. Trace.Assert or Trace.Write로 해결할 수 있다면 그걸로 처리
+- try - catch는 지양. Trace.Assert or Trace.Write로 해결할 수 있다면 그걸로 처리
 - 봇 분리(??)
-    
-    - 디버깅 용으로 Agent 띄워 놓으면, 기존 시간 변경 채널 명령어를 내 Agent가 후킹함
-    - 문제는 뭔가 오류가 있어서 filter_key를 못찾는 에러 발생
-    - 디버깅 용도로 쓸 때는 다른 봇을 쓰는 분리가 필요할 것 같은데.
+	- 디버깅 용으로 Agent 띄워 놓으면, 기존 시간 변경 채널 명령어를 내 Agent가 후킹함
+	- 문제는 뭔가 오류가 있어서 filter_key를 못찾는 에러 발생
+	- 디버깅 용도로 쓸 때는 다른 봇을 쓰는 분리가 필요할 것 같은데.
+
 
 ## TroubleShooting
 
