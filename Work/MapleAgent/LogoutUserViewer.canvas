@@ -1,0 +1,8 @@
+{
+	"nodes":[
+		{"id":"83b2baa21d463025","x":-335,"y":104590,"width":250,"height":60,"type":"text","text":""},
+		{"id":"38cecf69bdc521e8","type":"text","text":"","x":-140,"y":-340,"width":240,"height":60},
+		{"id":"e9f9b04a2dff6e47","type":"text","text":"기존 LogoutUserViwer 흐름\n    1. [runserver.py](http://runserver.py), elif(serviceType==’Live’) 인 경우\n        1. 리전(글로벌: asia1 asia2…) 별로 LRUDict(크기 제한 100000) 생성\n        2. LocalDBInit 호출: 6시간 분의 log_connect 로그를 캐싱(왜??)\n            1. 로그아웃 한 유저의 connect 정보가 6시간 내로 남아 있다면 상관이 없는데\n            2. 6시간보다 전이라면??\n            3. 실제로 동접하락 채널을 보면…… 하나도 못 찾아 오는 것 같은데? 텅 비어있음\n            4. 그냥 logout_character에 ip/country/language/os 정보를 남기는 방향으로 가기로 함\n        3. 스케쥴러에 LogoutuserViewer.Coruntine 등록\n    2. [LogoutUserViewer.py](http://LogoutUserViewer.py)\n        1. 일정 주기(REFRESHMINUTE = 1분)로 RefreshCache 실행하여 캐시 최신화\n        2. GetCurrentUsersPair: log_current_user에서 현재 유저 목록 가져옴\n        3. GetLogoutCharacter: log_character_logout에서 로그 아웃 캐릭터 가져옴\n        4. MakeMessage\n            1. 메시지의 대부분은 위 정보(log_current_user, log_character_logout)로 만들어짐\n            2. GetUserSetInfo 1.","x":-520,"y":-15620,"width":460,"height":400}
+	],
+	"edges":[]
+}

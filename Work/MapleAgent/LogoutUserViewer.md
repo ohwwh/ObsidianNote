@@ -11,10 +11,9 @@
     1. [runserver.py](http://runserver.py), elif(serviceType==’Live’) 인 경우
         1. 리전(글로벌: asia1 asia2…) 별로 LRUDict(크기 제한 100000) 생성
         2. LocalDBInit 호출: 6시간 분의 log_connect 로그를 캐싱(왜??)
-            1. 로그아웃 한 유저의 connect 정보가 6시간 내로 남아 있다면 상관이 없는데
-            2. 6시간보다 전이라면??
-            3. 실제로 동접하락 채널을 보면…… 하나도 못 찾아 오는 것 같은데? 텅 비어있음
-            4. 그냥 logout_character에 ip/country/language/os 정보를 남기는 방향으로 가기로 함
+            - 로그아웃 한 유저의 connect 정보가 6시간 내로 남아 있다면 상관이 없는데, 6시간보다 전이라면??
+            - 실제로 동접하락 채널을 보면…… 하나도 못 찾아 오는 것 같은데? 텅 비어있음
+            - 그냥 logout_character에 ip/country/language/os 정보를 남기는 방향으로 가기로 함
         3. 스케쥴러에 LogoutuserViewer.Coruntine 등록
     2. [LogoutUserViewer.py](http://LogoutUserViewer.py)
         1. 일정 주기(REFRESHMINUTE = 1분)로 RefreshCache 실행하여 캐시 최신화
@@ -23,11 +22,11 @@
         4. MakeMessage
             1. 메시지의 대부분은 위 정보(log_current_user, log_character_logout)로 만들어짐
             2. GetUserSetInfo 1.
-- [https://confluence.nexon.com/display/MAPM/LogoutUserViewer](https://confluence.nexon.com/display/MAPM/LogoutUserViewer)
+[https://confluence.nexon.com/display/MAPM/LogoutUserViewer](https://confluence.nexon.com/display/MAPM/LogoutUserViewer)
 
 ## 작업흐름
+---
 - log_character_logout 컬럼 추가
-    
     - LogSchema.xml 수정
     - Protocol::NCache::Branch{Location}::Schema.h, Schema.cpp 수정
     - CharacterLogout.cpp 수정
@@ -38,8 +37,8 @@
 - 메시지 작성 부 구현
 
 ## 쟁점
+---
 - 각각의 테이블을 어떻게 불러올 것인가?
-    
     - 기존 MapleAgent의 경우 CommonDB에 띄우기 때문에 직접 DB에서 Select가 가능
     - MapleAgent(新)은 202에 떠 있기 때문에, 현재는 운영툴 API를 호출하여 로그를 불러오는 방식으로 작업되어 있음
     
@@ -82,7 +81,7 @@
 		    - 서버 코드 수정, 점검 스크립트 메일 재 발송
 - API를 호출할 때, 월드 별로 따로 호출하는 현재의 API를 쓸 것인가 vs 모든 월드 별로 쿼리를 실행하여 결과를 합쳐주는 새로운 API를 팔 것인가
 - 예외 처리를 어떻게 할 것인가?
-- try - catch는 지양. Trace.Assert or Trace.Write로 해결할 수 있다면 그걸로 처리
+	- try - catch는 지양. Trace.Assert or Trace.Write로 해결할 수 있다면 그걸로 처리
 - 봇 분리(??)
 	- 디버깅 용으로 Agent 띄워 놓으면, 기존 시간 변경 채널 명령어를 내 Agent가 후킹함
 	- 문제는 뭔가 오류가 있어서 filter_key를 못찾는 에러 발생
@@ -90,7 +89,7 @@
 
 
 ## TroubleShooting
-
+---
 - 동접 유저 수가 한 자리 ~ 두 자릿수 밖에 안 된다고??
 - Diff와 LogoutChar 가 다른 건 무슨 경우??
 - Channel null인 이슈
