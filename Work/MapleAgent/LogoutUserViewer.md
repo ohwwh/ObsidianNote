@@ -80,6 +80,17 @@
 		    -  LogSchema 상의 순서(=실제 DB상의 컬럼 순서)와 서버 코드(Schema.h)의 순서가 다른 경우, typearray의 Index가 달라져 문제가 생김: 테스트 시 실제로 데이터가 이상하게 들어가는 것 확인![[Pasted image 20231215103616.png]]
 		    - 서버 코드 수정, 점검 스크립트 메일 재 발송
 - API를 호출할 때, 월드 별로 따로 호출하는 현재의 API를 쓸 것인가 vs 모든 월드 별로 쿼리를 실행하여 결과를 합쳐주는 새로운 API를 팔 것인가
+	- 새로운 API를 파려면 log_current_user, log_character_logout 둘 다 새로 파야 함
+	- 결정적으로, 서버 별로 돌면서 메시지를 생성해야 하는데 월드 별 쿼리 결과가 합쳐진 리스트 두 개를 순회하기가 굉장히 곤란해짐 
+	- 따로 단점이 있는 것도 아니기 때문에
+	- 월드 별로 따로 호출해야 할 듯
+- makeMsg 함수를 따로 만들 것인가 vs 그냥 showFlag 설정하는 루프 돌면서 메시지도 함께 만들어 버릴 것인가
+- commonConfig를 어떻게 없앨 것인가
+	- 시차 정보는 어디에 저장해 놓고 불러올 것인가
+	- 잡 인덱스 <-> 잡 이름 정보는 어디에 저장해 놓고 불러올 것인가
+		- App_Data\\CodeData, Xml\\CodeValue 만지작 거려서 해결
+		- GOT_ReadLogCharacterLogoutByTime을 다른 곳에서 쓸 때 문제가 안 될까??
+		- log_character_logout 테이블의 job 컬럼 자체를 내가 최근에 추가한 거라, 다른데서 사용해도 job을 파싱해 오지 않을 것이라 괜찮을 듯
 - 예외 처리를 어떻게 할 것인가?
 	- try - catch는 지양. Trace.Assert or Trace.Write로 해결할 수 있다면 그걸로 처리
 - 봇 분리(??)
@@ -142,3 +153,5 @@
         - 런덱은, 아마존 EC2 서버 장비에서 돌아간다. 따라서 해당 장비(인스턴스) 정보를 알아야 함
         - 최근 Credential.json 파일 구조 변경이 있었고, 이 때 China EC2 정보가 빠져 버린 것이 원인
         - [EC2와 S3의 차이?](https://www.notion.so/EC2-vs-S3-141dc92923dc426a980e5dcdba22b2c2?pvs=21)
+- log_current_user 결과 값 갯수가 한 개라 outofrange exception 나는 이슈
+	- 전체 월드에 대해 쿼리 실행 > 월드 별로 각각 실행으로 바꾼 후, GOT API 내부 리턴 양식 수정 안 함
