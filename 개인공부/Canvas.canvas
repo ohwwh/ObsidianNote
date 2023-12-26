@@ -1,0 +1,15 @@
+{
+	"nodes":[
+		{"id":"1a699f53e46aaff0","x":-280,"y":80,"width":180,"height":50,"type":"text","text":"Mark & Sweep"},
+		{"id":"a5e97b810ffc85fd","x":-43,"y":17,"width":203,"height":50,"type":"text","text":"Tri-colorMarking"},
+		{"id":"d857631d7ae1b06e","x":-35,"y":145,"width":175,"height":75,"type":"text","text":"Mark & Sweep & Compact"},
+		{"id":"0b2976864b6feee1","x":200,"y":120,"width":220,"height":50,"type":"text","text":"Copying Algorithm"},
+		{"id":"8e1d79f196c201a4","x":209,"y":198,"width":191,"height":50,"type":"text","text":"Generational GC"}
+	],
+	"edges":[
+		{"id":"3ad4ef42ac4b7791","fromNode":"1a699f53e46aaff0","fromSide":"right","toNode":"a5e97b810ffc85fd","toSide":"left"},
+		{"id":"ab45832c1dfb6493","fromNode":"1a699f53e46aaff0","fromSide":"right","toNode":"d857631d7ae1b06e","toSide":"left"},
+		{"id":"7f40c57e45642dee","fromNode":"d857631d7ae1b06e","fromSide":"right","toNode":"0b2976864b6feee1","toSide":"left"},
+		{"id":"234a7465975c1da3","fromNode":"d857631d7ae1b06e","fromSide":"right","toNode":"8e1d79f196c201a4","toSide":"left"}
+	]
+}

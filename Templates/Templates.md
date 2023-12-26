@@ -1,0 +1,5 @@
+[[Bug_Template]]
+[[DailyNote_Template]]
+[[Project_Template]]
+[[Recipe_Template]]
+[[Study_Template]]
