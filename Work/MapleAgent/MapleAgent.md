@@ -22,6 +22,7 @@
 - C# 코드 내에서 해당 토큰을 통해 슬랙 api를 호출하면, 해당 api가 슬랙의 메시지를 hooking 한다.
 - 이 메시지가 어떤 채널에서 호출되었는지, 명령어가 무엇인지 여부에 따라 해당 기능을 실행한다.
 - [[Slack] OAuth Token 생성하기 (tistory.com)](https://miaow-miaow.tistory.com/148)
+- [.NET 7을 사용하여 사용자 지정 Slack 봇을 만드는 방법 – Daniel Donbavand](https://danieldonbavand.com/2023/05/03/how-to-create-a-custom-slack-bot-with-net-7/)
 
 
 

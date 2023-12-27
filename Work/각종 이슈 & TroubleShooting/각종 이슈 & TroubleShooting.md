@@ -188,3 +188,7 @@
 - Workbench DB 접속 불가 오류
 	- SSL connection error: error: 1425F102:SSL routines:ssl_choose_client_version:unsupported protocol
 	- Edit Connection > SSL > Use SSL 을 No로 설정 시 해결
+
+- Visual Studio: 코드 업데이트 확인 중
+	- 한 줄 씩 디버깅 시 F10 누를 때 마다 "코드 업데이트 확인 중" 이라고 뜨며 응답없음 상태에 빠짐
+	- Visual Studio 재 시작 시 해결되었음

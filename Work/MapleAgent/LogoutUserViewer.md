@@ -22,6 +22,10 @@
         4. MakeMessage
             1. 메시지의 대부분은 위 정보(log_current_user, log_character_logout)로 만들어짐
             2. GetUserSetInfo 1.
+            3. Purchase 테이블에서, user_no  리스트에 있는 유저의 결제 정보를 조회
+	            - SELECT user_no, count(\*) FROM Purchase WHERE user_no in ()
+	        4. PURCHASEBOUND보다 결제 건수가 적은 유저의 수 / 많은 유저의 수 출력
+		        - 현재 코드 상으로는 결제 건수가 1건 보다 많으면 Over, 
 [https://confluence.nexon.com/display/MAPM/LogoutUserViewer](https://confluence.nexon.com/display/MAPM/LogoutUserViewer)
 
 ## 작업흐름
@@ -97,7 +101,11 @@
 	- 디버깅 용으로 Agent 띄워 놓으면, 기존 시간 변경 채널 명령어를 내 Agent가 후킹함
 	- 문제는 뭔가 오류가 있어서 filter_key를 못찾는 에러 발생
 	- 디버깅 용도로 쓸 때는 다른 봇을 쓰는 분리가 필요할 것 같은데.
-
+- top 5 job, ip, langauge, country 관리를 어떻게 할 것인가
+	- jobDict, ipDict, countryDict, langaugeDict를 다 따로 만들고 루프 돌면서 넣은 후, top 5만 OrderByDescending.Take(5)로 뽑아내기
+	- 위에서 뽑아낸 IEnumarable은, ToList()로 KeyValuePair 구조체의 list로 변환해 준다
+- JobIndex 가공할 때 Substring 예외처리
+- PurchaseBound가 뭐야 대체
 
 ## TroubleShooting
 ---
@@ -155,3 +163,8 @@
         - [EC2와 S3의 차이?](https://www.notion.so/EC2-vs-S3-141dc92923dc426a980e5dcdba22b2c2?pvs=21)
 - log_current_user 결과 값 갯수가 한 개라 outofrange exception 나는 이슈
 	- 전체 월드에 대해 쿼리 실행 > 월드 별로 각각 실행으로 바꾼 후, GOT API 내부 리턴 양식 수정 안 함
+- MapleAgent_Test가 메시지 후킹 못하는 문제
+	- Socket 모드가 disabled 되어 있던 문제
+	- [[MapleAgent]] 문서의  [.NET 7을 사용하여 사용자 지정 Slack 봇을 만드는 방법 – Daniel Donbavand](https://danieldonbavand.com/2023/05/03/how-to-create-a-custom-slack-bot-with-net-7/) 문서 참조
+	- 모든 채널에서 메시지를 후킹하는 문제
+		- Subscribe to events on behalf of users 여기서 이벤트 제거하기
