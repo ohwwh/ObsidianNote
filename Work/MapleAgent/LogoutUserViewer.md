@@ -91,6 +91,7 @@
 - makeMsg 함수를 따로 만들 것인가 vs 그냥 showFlag 설정하는 루프 돌면서 메시지도 함께 만들어 버릴 것인가
 - commonConfig를 어떻게 없앨 것인가
 	- 시차 정보는 어디에 저장해 놓고 불러올 것인가
+		- Location.json이 아무래도 무난하지 않을까
 	- 잡 인덱스 <-> 잡 이름 정보는 어디에 저장해 놓고 불러올 것인가
 		- App_Data\\CodeData, Xml\\CodeValue 만지작 거려서 해결
 		- GOT_ReadLogCharacterLogoutByTime을 다른 곳에서 쓸 때 문제가 안 될까??
@@ -105,7 +106,12 @@
 	- jobDict, ipDict, countryDict, langaugeDict를 다 따로 만들고 루프 돌면서 넣은 후, top 5만 OrderByDescending.Take(5)로 뽑아내기
 	- 위에서 뽑아낸 IEnumarable은, ToList()로 KeyValuePair 구조체의 list로 변환해 준다
 - JobIndex 가공할 때 Substring 예외처리
-- PurchaseBound가 뭐야 대체
+	- 가공을 할 필요가 없어짐(그냥 4-아델 이런 식으로 dictionary에 보관)
+- LogoutUserViewer MapleAgent 하위로 분리 & 테스트용 커맨드 제작
+	- 테스트용 커맨드를 제작하다 보니, LogoutUserViewer 관련 코드가 WindowsServiceScheduler 프로젝트 하위가 아니라 MapleAgent 프로젝트 하위에 있는 것이 낫다고 느껴짐
+		- 개념 상 그게 맞기도 함
+	- LogoutUserViewer 코드를 MapleAgent 클래스 안에 포함시키면서, 파일은 2개로 분리?
+		- partial 키워드 이용
 
 ## TroubleShooting
 ---
@@ -154,13 +160,16 @@
     - webApi.json에 API 이름 잘못 입력
     - API 없을 시 404 Not found가 뜨는데, 이 에러가 뜨면 그냥 return을 null로 받음.
     - Trace.Write로 로그만 남기도록 처리
-- 중국 aws 인스턴스 못 찾는 이슈
+- 중국 aws 인스턴스 못 찾는 이슈(\_instance_group이 null)
     - Credential.json에 China EC2 무언가를 추가하니 해결
     - 하지만 AWS랑 런덱 필터랑 대체 무슨 상관이지??
         - 런덱 필터란, 다른게 아니라 어떤 장비에 설치된 런덱을 실행할 지 알려주는 것
         - 런덱은, 아마존 EC2 서버 장비에서 돌아간다. 따라서 해당 장비(인스턴스) 정보를 알아야 함
         - 최근 Credential.json 파일 구조 변경이 있었고, 이 때 China EC2 정보가 빠져 버린 것이 원인
         - [EC2와 S3의 차이?](https://www.notion.so/EC2-vs-S3-141dc92923dc426a980e5dcdba22b2c2?pvs=21)
+    - 또는 MapleAgent를 키자 마자 명령어를 날리는 경우, aws init이 완료되지 않아서 뜰 수도 있음
+- PurchaseBound가 뭐야 대체
+	- 위의 기존 LogoutUserViewer 흐름 참조
 - log_current_user 결과 값 갯수가 한 개라 outofrange exception 나는 이슈
 	- 전체 월드에 대해 쿼리 실행 > 월드 별로 각각 실행으로 바꾼 후, GOT API 내부 리턴 양식 수정 안 함
 - MapleAgent_Test가 메시지 후킹 못하는 문제
@@ -168,3 +177,8 @@
 	- [[MapleAgent]] 문서의  [.NET 7을 사용하여 사용자 지정 Slack 봇을 만드는 방법 – Daniel Donbavand](https://danieldonbavand.com/2023/05/03/how-to-create-a-custom-slack-bot-with-net-7/) 문서 참조
 	- 모든 채널에서 메시지를 후킹하는 문제
 		- Subscribe to events on behalf of users 여기서 이벤트 제거하기
+- timeget 명령어 안 먹히는 이슈
+	- Response status code does not indicate success: 409 (Conflict)
+	- MapleAgent는 잘 먹는데, MapleAgent_Test는 위 에러 띄우면서 안 됨
+	- MapleAgent_Test 전용 명령어(gettest) 만들어서 날리니 잘 된다
+	- 아마 런덱에 두 앱이 같은 명령을 동시에 날려서 Conflict가 난 것으로 추정
