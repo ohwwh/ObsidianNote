@@ -1,5 +1,6 @@
 ## 개요
 ---
+- [[2023-12-22]]
 - 오전 QA 빌드 이후, DB 빌드 실패 & QA 빌드 증발
 - 런덱 잡이 실패
 	- [MapleM China - DB_Update](http://54.168.224.205:4440/project/MapleStoryM-China/job/show/723175b9-ab68-4693-9108-ab2edea0947a)
