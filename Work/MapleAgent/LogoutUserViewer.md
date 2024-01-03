@@ -30,16 +30,18 @@
 
 ## 작업흐름
 ---
-- log_character_logout 컬럼 추가
-    - LogSchema.xml 수정
-    - Protocol::NCache::Branch{Location}::Schema.h, Schema.cpp 수정
-    - CharacterLogout.cpp 수정
-- log_current_user SP 추가
-    
-- purchase SP 추가
-    
+- GOT 수정
+	- log_character_logout 컬럼 추가
+	    - LogSchema.xml 수정
+	    - Protocol::NCache::Branch{Location}::Schema.h, Schema.cpp 수정
+	    - CharacterLogout.cpp 수정
+	- log_current_user SP/API 추가
+	- purchase SP/API 추가
+	- WorldList API 추가
 - 메시지 작성 부 구현
-
+- 202에서 테스트
+	- MapleAgentTest + 로컬 운영툴로 테스트
+	- MapleAgentTest + 알파 운영툴로 테스트
 ## 쟁점
 ---
 - 각각의 테이블을 어떻게 불러올 것인가?
@@ -114,6 +116,11 @@
 		- 개념 상 그게 맞기도 함
 	- LogoutUserViewer 코드를 MapleAgent 클래스 안에 포함시키면서, 파일은 2개로 분리?
 		- partial 키워드 이용
+- http  오류 났을 때 처리
+	- 종료 시켜 버리기  vs 에러 로그 남기기
+- 왜 srcTime에서 3분을 빼는 건지?? 그리고 왜 GOT_ReadLogCurrentUserUserCount 실행 시 왜 2분을 빼서 돌리는지?? 이러면 3개의 분에 대해서 결과가 나오는데....
+	- 3분 뺀 건 뭔가 버퍼를 둔 것 같은데 왜 그랬는지 이해는 잘 안감....
+	- 2분 뺀 것도 이유를 모르겠음. 첫 번째랑 두 번째 컬럼만 쓰던 데 그러면 1분 전이랑 2분전(위의 버퍼 고려하면 4 분전이랑 5 분전)을 비교하는 건데......?
 
 ## TroubleShooting
 ---
@@ -184,3 +191,12 @@
 	- MapleAgent는 잘 먹는데, MapleAgent_Test는 위 에러 띄우면서 안 됨
 	- MapleAgent_Test 전용 명령어(gettest) 만들어서 날리니 잘 된다
 	- 아마 런덱에 두 앱이 같은 명령을 동시에 날려서 Conflict가 난 것으로 추정
+- Http 오류 시 에러 메시지 알아보기 어려운 이슈(2024-01-03)
+	- try catch 블록에서 그냥 Exception 클래스로 잡아 버리는 바람에, 프로그램이 종료도 안 되고 에러가 났는지도 알기 힘들며 무슨 에런지 메시지를 봐도 모름
+	- 그냥 try catch를 없애 버리고 http 오류 나면 봇 종료 시켜 버리는 방향으로 해결
+- 202에서 테스트시 Error Occured 뜨는 이슈(2024-01-03)
+	- 로컬 운영툴(10.10.56.243:8080)에 연결 못하는 문제
+	- 로컬 머신에서 8080 포트에 대해 방화벽 해제 후 테스트
+- log_current_user 0인 이슈
+	- UTC 값을 제대로 적용 안 함(어딘 적용하고 어딘 안 하고....)
+	- json serialize할 때 property 이름이 안 맞음(UserCnt <=> UserCount)
