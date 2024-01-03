@@ -25,6 +25,6 @@
 - [.NET 7을 사용하여 사용자 지정 Slack 봇을 만드는 방법 – Daniel Donbavand](https://danieldonbavand.com/2023/05/03/how-to-create-a-custom-slack-bot-with-net-7/)
 
 
-
+[[Window 서비스 등록]]
 [[LogoutUserViewer]]
  

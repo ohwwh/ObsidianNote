@@ -192,5 +192,9 @@
 	- Edit Connection > SSL > Use SSL 을 No로 설정 시 해결
 
 - Visual Studio: 코드 업데이트 확인 중
-	- 한 줄 씩 디버깅 시 F10 누를 때 마다 "코드 업데이트 확인 중" 이라고 뜨며 응답없음 상태에 빠짐
+	- 한 줄 씩 디버깅 시 F10 누를 때 마다 "코드 업데이트 확인 중" 이라고 뜨며 응답 없음 상태에 빠짐
 	- Visual Studio 재 시작 시 해결되었음
+
+- Incredibuild가 Stand Alone 으로 돌아가는 경우
+	- Message 창을 보면 initiator 등록이 안 되었다는 경고 메시지가 있음. 
+	- 승욱 님에게 문의하여 initiator로 등록해주자

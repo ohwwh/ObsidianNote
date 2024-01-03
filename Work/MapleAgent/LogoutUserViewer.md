@@ -91,7 +91,9 @@
 - makeMsg 함수를 따로 만들 것인가 vs 그냥 showFlag 설정하는 루프 돌면서 메시지도 함께 만들어 버릴 것인가
 - commonConfig를 어떻게 없앨 것인가
 	- 시차 정보는 어디에 저장해 놓고 불러올 것인가
-		- Location.json이 아무래도 무난하지 않을까
+		- Location.json 내부에 Region 섹션을 만들어 관리하려고 했는데, Region.json이랑 이름이 겹침.....
+			- 코드 내부에서 \_locations, \_regions 이런 식으로 리스트를 만들어 관리해서, 이름이 겹치면 곤란함
+			- location json 내부에 region 리스트를 따로 만들어서 해결(location.region으로 접근)
 	- 잡 인덱스 <-> 잡 이름 정보는 어디에 저장해 놓고 불러올 것인가
 		- App_Data\\CodeData, Xml\\CodeValue 만지작 거려서 해결
 		- GOT_ReadLogCharacterLogoutByTime을 다른 곳에서 쓸 때 문제가 안 될까??
