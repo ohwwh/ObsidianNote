@@ -2,7 +2,7 @@
 ---
 DashBoard → BuildAndPatch → Build >> Deploy → 파라미터와 함께 빌드
 이거 한번 할 때 마다 버전이 올라간다고 보면 된다.
-[Deploy](https://www.notion.so/Deploy-293e3cd99e124f5dafd0df6b14a3df3a?pvs=21)
+[[Deploy]]문서 참조
 
 
 ## How to Run
