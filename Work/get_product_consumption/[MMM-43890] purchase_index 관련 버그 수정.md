@@ -22,11 +22,11 @@ purchase_index가 같은 상품을 2회 이상 구매한 경우, order_id로 소
 ---
 1. API 코드 상에서, receipt_key가 null인 경우에만 purchase_index가 일치하는 메일 로그를 읽어오도록 수정(임시 조치, 아래 SP 업데이트 이후 원복 예정)
 2. GOT_ReadLogMailIdAll SP 수정
-	- (receipt_key = i_order_id) OR (reserve_int_01 = i_item_idx) (before)
-	- (receipt_key = i_order_id) OR (receipt_key =null and reserve_int_01 = i_item_idx) (after)
+	- (receipt_key = i_order_id) OR (reserve_int_01 = i_item_idx) *(before)*
+	- (receipt_key = i_order_id) OR (receipt_key =null and reserve_int_01 = i_item_idx) *(after)*
 
 ## TroubleShooting
 ---
 - 수정 후 receipt_flag = 1 -> 0이 되는 이슈
-	- ReceiptKey가 비어 있다면, ""로 파싱됨
+	- ReceiptKey가 비어 있다면, ""로 파싱됨 => null인지 비교하면 조건문에 걸리지 않음
 	- == null이 아니라 IsNullOrWhiteSpace() == true로 비교해야 함

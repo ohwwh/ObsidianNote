@@ -212,15 +212,7 @@
 - 지역 Korea로 커맨드 날릴 시, GOT 죽어 있으면 로그 안 남는 이슈 (2024-01-04)
 	- 원인 찾다가 이것 저것 곁다리로 고치면서, 원인이 뭐였는지, 애초에 이슈가 뭐였는지도 잊어버림.....
 	- 일단 WebApiManager.GetWorldList를 Execute로 대체하고, Http 에러 시 오류 코드를 이 Execute(WebApi.Execute) 밑으로 빼는 작업 진행함
-- SlackNet.SlackException: Slack returned an error response: not_in_channel 남기고 죽는 이슈(2023-01-05)
-	- ConcurrentUser()에서 오류 발생
-	- Channel.json의 CURRENTUSER 그룹에 LogoutUserViewer 용으로 동접 하락 채널들을 넣어 놓았더니, ConcurrentUser 도 해당 채널로 메시지를 보냄
-	- 해당 채널들에 MapleAgentTest 봇이 추가가 안 되어 있어서 exception 발생
-	- 아예 ChannelGroup에서 LOGOUTUSER를 분리함
-- ConcurrentUser() 돌 때 Channel이 null인 이슈
-	- CURRENTUSER channelgroup에 location이 ALL 밖에 없음
-	- 무슨 의도인지는 알겠는데 국가를 찾지를 못함
-	- 아마 
-- - ProcessAgent 에서 주기적으로 도는 코드들이 이따금 실행 안 되는 이슈
-    - !\_agent.Ready() 여기서 걸림
-    - \_awsManager가 실행이 안 된 상황
+- QA 운영툴 접속 못하는 이슈
+	- 2023-01-09 기준 접속 잘 하고 있음
+- 인덱스가 범위를 벗어났습니다. 인덱스는 음수가 아니어야 하며 컬렉션의 크기보다 작아야 합니다. 매개 변수 이름: index
+	- ??
